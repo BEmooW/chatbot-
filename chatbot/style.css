@@ -15,10 +15,11 @@
     width: 350px;
     background: var(--light-color);
     position: fixed;
-    bottom: 0px;
+    bottom: 50px;
     right: 10px;
     box-shadow: 0px 0px 15px 0px black;
 }
+
 
 /* icon */
 /* .chatButton{
@@ -38,8 +39,8 @@
     /* margin-top: 10%; */
     border: none;
     background: transparent;
-
 }
+
 
 .chatButton img {
     position: absolute;
@@ -54,7 +55,7 @@
 
 
 .chat-header {
-    height: 60px;
+    height: 48px;
     display: flex;
     align-items: center;
     padding: 0px 30px;
@@ -98,21 +99,26 @@
 }
 
 .input-sec {
-    flex: 9;
+    flex: 12;
 }
 
 .send {
     flex: 1;
+    padding: 10px;
     padding-right: 4px;
+    margin-bottom: 14px;
 }
 
 #txtinput {
     line-height: 30px;
-    padding: 8px 10px;
+    padding: 0px 0px;
     border: none;
     outline: none;
     caret-color: black;
     font-size: 1rem;
+    height: 50%;
+        margin-bottom: 10%;
+        margin-left: 10px;
 
 }
 
@@ -125,7 +131,16 @@
 .user-message {
     padding: 8px;
     background: #00b3ff;
-    margin: 5px;
+    margin: 8px;
+        width: max-content;
+        border-radius: 10px 3px 10px 10px;
+    }
+    
+    .user-message,
+    .chatbot-message {
+        padding: 8px;
+        background: #00b3ff;
+        margin: 8px;
     width: max-content;
     border-radius: 10px 3px 10px 10px;
 }
@@ -133,6 +148,7 @@
 .user-message {
     transform: translate(50%);
     opacity: 0;
+    margin-top: 50px;
     animation: fade-in-right 0.3s ease-in-out both;
 }
 
@@ -187,7 +203,15 @@
     width: 40px;
     animation: fade-in-left 0.3s ease-in-out both;
 }
-
+select {
+    border-radius: 10px;
+    align-items: center;
+    width: 65%;
+    left: 0;
+    /* padding-left: 20px; */
+    margin-left: 16%;
+    margin-top: 2%;
+}
 @keyframes fade-in-right {
     0% {
         transform: translate(50%);
@@ -224,4 +248,30 @@
 
 .hide {
     display: none !important;
+}
+#mute img {
+    /* background: transparent; */
+    width: 15px;
+    height: 15px;
+    display: flex;
+    opacity: 0.8;
+
+}
+
+#mute {
+    background: transparent;
+    border: none;
+}
+
+#click_to_record {
+    background: transparent;
+    border: none;
+    /* display: flex; */
+}
+
+#click_to_record img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    margin-bottom: 15px;
 }

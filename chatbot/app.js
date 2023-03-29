@@ -117,18 +117,7 @@ const getChatbotResponse = (userInput) => {
             speechBtn.innerText = "Convert To Speech";
         }
     }
-//       voiceList = document.querySelector("select");
-//       speechBtn = document.querySelector("button");
 
-//       let synth = speechSynthesis,
-//     isSpeaking = true;
-
-// voices();
-
-
-
-
-      // **************
       setScrollPosition();
       toggleLoading(true);
       
@@ -181,22 +170,12 @@ const chatBotService = {
 // ******************************************
 // ******************************************
 // ******************************************
-// speech part
-// const txtNode = document.createTextNode(txt);
-// if (type !== "user") {
-//   console.log(txtNode);}
-
-//   const userInput = txtinput.value;
-//   renderMessageEle(userInput, "user");
-
-//   chatBotService
-//     .getBotResponse(userInput)
 
 
 
 
-const textarea = document.querySelector("textarea"),
-voiceList = document.querySelector("select"),
+
+const voiceList = document.querySelector("select"),
 speechBtn = document.querySelector("button");
 
 let synth = speechSynthesis,
@@ -208,47 +187,63 @@ function voices(){
     for(let voice of synth.getVoices()){
         let selected = voice.name === "Google US English" ? "selected" : "";
         let option = `<option value="${voice.name}" ${selected}>${voice.name} (${voice.lang})</option>`;
+        
         voiceList.insertAdjacentHTML("beforeend", option);
     }
 }
 
 synth.addEventListener("voiceschanged", voices);
 
-function textToSpeech(text){
-    let utterance = new SpeechSynthesisUtterance(text);
-    for(let voice of synth.getVoices()){
-        if(voice.name === voiceList.value){
-            utterance.voice = voice;
-        }
+
+let isMuted = false;
+const muteButton = document.getElementById("mute");
+const muteImg = document.getElementById("muteBtn");
+
+muteButton.addEventListener('click', () => {
+  isMuted = !isMuted;
+  if (isMuted) {
+    muteImg.setAttribute("src", "../chatbot/images/mute.png");
+  } else {
+    muteImg.setAttribute("src", "../chatbot/images/volume.png");
+  }
+});
+
+function textToSpeech(text) {
+  // console.log("yes");
+  // console.log(isMuted);
+  let utterance = new SpeechSynthesisUtterance(text);
+  for (let voice of synth.getVoices()) {
+    if (voice.name === voiceList.value) {
+      utterance.voice = voice;
     }
+  }
+
+  if (isMuted) {
+    synth.cancel(); // stop speaking if the mute flag is set
+  } else {
     synth.speak(utterance);
+  }
 }
 
-speechBtn.addEventListener("click", e =>{
-    e.preventDefault();
-    if(textarea.value !== ""){
-        if(!synth.speaking){
-            textToSpeech(textarea.value);
-        }
-        if(textarea.value.length > 80){
-            setInterval(()=>{
-                if(!synth.speaking && !isSpeaking){
-                    isSpeaking = true;
-                    speechBtn.innerText = "Convert To Speech";
-                }else{
-                }
-            }, 500);
-            if(isSpeaking){
-                synth.resume();
-                isSpeaking = false;
-                speechBtn.innerText = "Pause Speech";
-            }else{
-                synth.pause();
-                isSpeaking = true;
-                speechBtn.innerText = "Resume Speech";
-            }
-        }else{
-            speechBtn.innerText = "Convert To Speech";
-        }
-    }
-});
+const recordBtn = document.getElementById("click_to_record");
+recordBtn.addEventListener('click',function(){
+  var speech = true;
+  window.SpeechRecognition = window.webkitSpeechRecognition;
+
+  const recognition = new SpeechRecognition();
+  recognition.interimResults = true;
+
+  recognition.addEventListener('result', e => {
+      const transcript = Array.from(e.results)
+          .map(result => result[0])
+          .map(result => result.transcript)
+          
+          // txtinput.value="nemchi jawi behy";
+          txtinput.value = transcript;
+          console.log(transcript);
+  });
+  
+  if (speech == true) {
+      recognition.start();
+  }
+})

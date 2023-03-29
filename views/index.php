@@ -32,7 +32,6 @@ if (isset($_GET["updateEvent"]) && !empty($_GET["updateEvent"])) {
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../chatbot/style.css" />
     <style>
@@ -106,6 +105,10 @@ if (isset($_GET["updateEvent"]) && !empty($_GET["updateEvent"])) {
             </div>
             <div class="title">ChatBot</div>
         </div>
+        <div class="outer">
+            <select></select>
+            <button id="mute" value="off"><img id="muteBtn" src="../chatbot/images/volume.png" alt="icon"></button>
+        </div>
 
         <div class="chat-body">
             <div class="loading hide">
@@ -116,8 +119,9 @@ if (isset($_GET["updateEvent"]) && !empty($_GET["updateEvent"])) {
         </div>
         <div class="chat-input">
             <div class="input-sec">
-                <input type="text" id="txtinput" placeholder="Type here" autofocus>
+                <input type="text" id="txtinput" class="convert_text" placeholder="Type here" autofocus>
             </div>
+            <button id="click_to_record"><img src="../chatbot/images/microphone.png" alt="send"></button>
             <div class="send">
                 <img src="../chatbot/images/send-message.png" alt="send">
             </div>
@@ -129,14 +133,8 @@ if (isset($_GET["updateEvent"]) && !empty($_GET["updateEvent"])) {
 
 
 
-    <div class="row">
-        <label>Select Voice</label>
-        <div class="outer">
-            <select></select>
-        </div>
-    </div>
 
-    </div>
+
 
     <script src="../chatbot/app.js"></script>
     <script>
